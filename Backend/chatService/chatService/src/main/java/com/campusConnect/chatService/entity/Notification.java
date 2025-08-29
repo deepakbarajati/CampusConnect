@@ -1,6 +1,6 @@
 package com.campusConnect.chatService.entity;
 
-import com.campusConnect.chatService.entity.enums.Type;
+import com.campusConnect.chatService.entity.enums.NotificationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class Notification {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private NotificationType type;
 
     private String link;//to resource, job, forum, etc.  optional
 

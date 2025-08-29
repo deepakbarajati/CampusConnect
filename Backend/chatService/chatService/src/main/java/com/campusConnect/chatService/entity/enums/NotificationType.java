@@ -1,6 +1,6 @@
 package com.campusConnect.chatService.entity.enums;
 
-public enum Type {
+public enum NotificationType {
     CHAT,
     RESOURCE,
     ASSIGNMENT,
