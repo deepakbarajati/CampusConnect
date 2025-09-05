@@ -1,13 +1,10 @@
 package com.campusConnect.authService.entity;
 
 
+import com.campusConnect.authService.entity.enums.Branch;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -15,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,28 +23,26 @@ public class Profile {
     private User user;
 
     @Column(nullable = false)
-    private String firstName;
-
-    private String middleName;
+    private String firstname;
 
     @Column(nullable = false)
-    private String lastName;
+    private String lastname;
 
     @Column(nullable = false)
     private String bio;
 
-    @Column(nullable = false)
-    private String branch;
+    @Enumerated(EnumType.STRING)
+    private Branch branch;
 
     @Column(nullable = false)
-    private Year year;
+    private Integer year;
 
     @Column(nullable = false)
     private String designation;
 
     private List<String> skills;
 
-    private List<String> link;
+    private List<String> links;
 
     private List<String> achievements;
 }

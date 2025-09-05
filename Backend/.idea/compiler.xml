@@ -2,25 +2,27 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for gamificationService" enabled="true">
+      <profile name="Annotation profile for authService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
+        <module name="chatService" />
+        <module name="classroomService" />
         <module name="opportunityService" />
         <module name="aluminiService" />
+        <module name="authService" />
         <module name="forumService" />
-        <module name="chatService" />
         <module name="gamificationService" />
-        <module name="classroomService" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="aluminiService" options="-parameters" />
+      <module name="authService" options="-parameters" />
       <module name="chatService" options="-parameters" />
       <module name="classroomService" options="-parameters" />
       <module name="forumService" options="-parameters" />
