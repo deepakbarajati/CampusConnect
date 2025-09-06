@@ -77,5 +77,11 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(user, UserDTO.class);
     }
 
+    @Override
+    public Boolean userExist(Long userId) {
+
+        return userRepository.existsById(userId);
+    }
+
 
 }

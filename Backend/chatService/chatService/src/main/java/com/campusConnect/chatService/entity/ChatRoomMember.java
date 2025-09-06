@@ -1,10 +1,8 @@
 package com.campusConnect.chatService.entity;
 
-import com.campusConnect.chatService.entity.enums.MessageType;
+import com.campusConnect.chatService.entity.enums.MemberRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,30 +11,21 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-public class Message {
+public class ChatRoomMember {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
     @Column(nullable = false)
-    private Long senderId;
+    private Long userId;
 
     @Column(nullable = false)
-    private Long receiverId;
-
-    @Column(nullable = false)
-    private String content;
-
-    @Enumerated(EnumType.STRING)
-    private MessageType type;
+    private MemberRole role;
 
     @CreationTimestamp
-    private LocalDateTime sentAt;
-
-    private Boolean isRead;
+    private LocalDateTime joinedAt;
 }

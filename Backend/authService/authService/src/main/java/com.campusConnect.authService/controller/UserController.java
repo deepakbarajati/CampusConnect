@@ -51,5 +51,9 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUserById(userId,userDTO),HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/exists/{userId}")
+    public ResponseEntity<Boolean> userExistWithUserId(@PathVariable Long userId){
+        return new ResponseEntity<>(userService.userExist(userId),HttpStatus.OK);
+    }
 
 }

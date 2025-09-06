@@ -14,8 +14,12 @@ public class ChatRoom {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  private String name;
+
   @Enumerated(EnumType.STRING)
   private ChatType type;
 
   private Long createdBy;
+
+
 }

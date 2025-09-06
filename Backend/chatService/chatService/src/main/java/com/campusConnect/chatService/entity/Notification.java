@@ -21,7 +21,7 @@ public class Notification {
     private Long id;
 
     @Column(nullable = false)
-    private Long user_id;
+    private Long userId;
 
     @Column(nullable = false)
     private String message;
