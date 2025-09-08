@@ -19,6 +19,7 @@ public class ChatRoom {
   @Enumerated(EnumType.STRING)
   private ChatType type;
 
+  @Column(updatable = false)
   private Long createdBy;
 
 
