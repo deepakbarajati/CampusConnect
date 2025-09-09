@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for chatService" enabled="true">
+      <profile name="Annotation profile for opportunityService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -14,8 +14,8 @@
         <module name="classroomService" />
         <module name="opportunityService" />
         <module name="aluminiService" />
-        <module name="authService" />
         <module name="forumService" />
+        <module name="authService" />
         <module name="gamificationService" />
       </profile>
     </annotationProcessing>

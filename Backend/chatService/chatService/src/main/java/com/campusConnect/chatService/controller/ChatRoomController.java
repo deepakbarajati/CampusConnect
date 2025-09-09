@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/chatRoom")
 public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;

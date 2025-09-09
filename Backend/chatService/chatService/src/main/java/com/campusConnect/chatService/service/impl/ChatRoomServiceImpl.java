@@ -1,16 +1,17 @@
 package com.campusConnect.chatService.service.impl;
 
-import com.campusConnect.chatService.advice.ApiResponse;
+
+import com.campusConnect.chatService.client.UserClient;
 import com.campusConnect.chatService.dto.ChatRoomDTO;
 import com.campusConnect.chatService.entity.ChatRoom;
 import com.campusConnect.chatService.exception.ResourceNotFoundException;
+import com.campusConnect.chatService.repository.ChatRoomMemberRepository;
 import com.campusConnect.chatService.repository.ChatRoomRepository;
 import com.campusConnect.chatService.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,15 +20,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ChatRoomServiceImpl implements ChatRoomService {
     private final ModelMapper modelMapper;
-    private final RestClient restClient;
     private final ChatRoomRepository chatRoomRepository;
-
+    private final UserClient userClient;
+    private final ChatRoomMemberRepository chatRoomMemberRepository;
 
     @Override
     public ChatRoomDTO createChatRoom(ChatRoomDTO chatRoomDTO)
     {
 
-        if(!userExist(chatRoomDTO.getCreatedBy())){
+        if(!userClient.userExist(chatRoomDTO.getCreatedBy())){
             throw new ResourceNotFoundException("user not exist with this UserId: "+chatRoomDTO.getCreatedBy());
         }
 
@@ -57,8 +58,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
     @Override
     public ChatRoomDTO deleteChatRoomById(Long chatRoomId) {
-//        profileRepository.deleteByUserId(userId); there is some fields need to be added
         ChatRoom chatRoom=chatRoomRepository.findById(chatRoomId).orElseThrow(()->new ResourceNotFoundException("User Not found with ID: "+chatRoomId));
+        chatRoomMemberRepository.deleteByChatRoomId(chatRoomId);
         chatRoomRepository.delete(chatRoom);
         return modelMapper.map(chatRoom, ChatRoomDTO.class);
     }
@@ -72,13 +73,5 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
 
-    private Boolean userExist(Long userId){
-        String uri="exists/"+userId;
-        ApiResponse<Boolean> exist= restClient.get()
-                .uri(uri)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
 
-        return exist.getData();
-    }
 }

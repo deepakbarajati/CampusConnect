@@ -26,8 +26,7 @@ public class Message {
     @Column(nullable = false)
     private Long senderId;
 
-    @Column(nullable = false)
-    private Long receiverId;
+    private Long receiverId; //not null in case the chatRoom type is private
 
     @Column(nullable = false)
     private String content;

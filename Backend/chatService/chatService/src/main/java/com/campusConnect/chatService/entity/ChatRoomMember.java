@@ -2,14 +2,16 @@ package com.campusConnect.chatService.entity;
 
 import com.campusConnect.chatService.entity.enums.MemberRole;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class ChatRoomMember {
     @Id
