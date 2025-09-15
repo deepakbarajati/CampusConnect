@@ -1,22 +1,11 @@
 package com.campusConnect.authService.service;
 
-import com.campusConnect.authService.dto.UserDTO;
-import com.campusConnect.authService.entity.enums.Role;
+import com.campusConnect.authService.entity.User;
 
-import java.util.List;
 
 public interface UserService {
-    UserDTO userCreation(UserDTO userDTO);
 
-    List<UserDTO> getAllUser();
+    User getUserById(Long userId);
 
-    List<UserDTO> getAllUserByRole(Role role);
-
-    UserDTO getUserById(Long userId);
-
-    UserDTO deleteUserById(Long userId);
-
-    UserDTO updateUserById(Long userId,UserDTO userDTO);
-
-    Boolean userExist(Long userId);
+    Boolean userExistWithId(Long userId);
 }

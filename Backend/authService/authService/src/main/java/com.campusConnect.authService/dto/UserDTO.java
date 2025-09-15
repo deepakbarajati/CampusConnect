@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
+    private Long id;
 
     @NotBlank(message = "userName not be blank")
     private String username;

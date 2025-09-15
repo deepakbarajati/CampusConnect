@@ -1,59 +1,24 @@
 package com.campusConnect.authService.controller;
 
-
-import com.campusConnect.authService.dto.UserDTO;
-import com.campusConnect.authService.entity.enums.Role;
 import com.campusConnect.authService.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping()
-    public ResponseEntity<UserDTO> userCreation(@Valid @RequestBody UserDTO userDTO) {
-        return new ResponseEntity<>(userService.userCreation(userDTO), HttpStatus.CREATED);
-
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<UserDTO>> getAllUser(){
-        return new ResponseEntity<>(userService.getAllUser(),HttpStatus.OK);
-    }
-
-    @GetMapping("/role/{role}")
-    public ResponseEntity<List<UserDTO>> getAllUserByRole(@PathVariable Role role){
-        return new ResponseEntity<>(userService.getAllUserByRole(role),HttpStatus.OK);
-    }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.getUserById(userId),HttpStatus.FOUND);
+    public ResponseEntity<Boolean> userExistWithId(@PathVariable Long userId){
+        Boolean isExist=userService.userExistWithId(userId);
+        return ResponseEntity.ok(isExist);
     }
-
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.deleteUserById(userId),HttpStatus.ACCEPTED);
-    }
-
-    @PutMapping("/{userId}")
-    public ResponseEntity<UserDTO> updateUserById(@PathVariable Long userId, @Valid @RequestBody UserDTO userDTO ){
-        return new ResponseEntity<>(userService.updateUserById(userId,userDTO),HttpStatus.ACCEPTED);
-    }
-
-    @GetMapping("/exists/{userId}")
-    public ResponseEntity<Boolean> userExistWithUserId(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.userExist(userId),HttpStatus.OK);
-    }
-
 }

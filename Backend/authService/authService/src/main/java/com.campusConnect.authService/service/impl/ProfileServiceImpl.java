@@ -5,12 +5,14 @@ import com.campusConnect.authService.entity.Profile;
 import com.campusConnect.authService.entity.User;
 import com.campusConnect.authService.entity.enums.Branch;
 import com.campusConnect.authService.exception.ResourceNotFoundException;
+import com.campusConnect.authService.exception.UnAuthorisedException;
 import com.campusConnect.authService.repository.ProfileRepository;
 import com.campusConnect.authService.repository.UserRepository;
 import com.campusConnect.authService.service.ProfileService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,19 +30,12 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileDTO profileCreation(ProfileDTO profileDTO) {
         User user=userRepository.findById(profileDTO.getUserId()).orElseThrow(()->new ResourceNotFoundException("User Not found"));
-        Profile profile= Profile
-                .builder()
-                .achievements(profileDTO.getAchievements())
-                .bio(profileDTO.getBio())
-                .branch(profileDTO.getBranch())
-                .designation(profileDTO.getDesignation())
-                .firstname(profileDTO.getFirstname())
-                .lastname(profileDTO.getLastname())
-                .user(user)
-                .skills(profileDTO.getSkills())
-                .year(profileDTO.getYear())
-                .links(profileDTO.getLinks())
-                .build();
+        User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!user1.equals(user)){
+            throw new UnAuthorisedException("This user does not own this profile with id: "+profileDTO.getUserId());
+        }
+        Profile profile= modelMapper.map(profileDTO, Profile.class);
+        profile.setUser(user);
         profile=profileRepository.save(profile);
         profileDTO=modelMapper.map(profile, ProfileDTO.class);
         return profileDTO;
@@ -80,31 +75,39 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public ProfileDTO deleteProfileById(Long profileId) {
-         Profile profile=profileRepository.findById(profileId).orElseThrow(()->new ResourceNotFoundException("Profile Not found with ID: "+profileId));
+        Profile profile = profileRepository.findById(profileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile Not found with ID: " + profileId));
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!profile.getUser().getId().equals(currentUser.getId())) {
+            throw new UnAuthorisedException("This user does not own this profile with id: " + profileId);
+        }
         profileRepository.delete(profile);
         return modelMapper.map(profile, ProfileDTO.class);
     }
 
-    @Override
-    public ProfileDTO updateProfileById(Long profileId,ProfileDTO profileDTO) {
-        Profile profile=profileRepository.findById(profileId).orElseThrow(()->new ResourceNotFoundException("Profile Not found with ID: "+profileId));
-//        User user=userRepository.findById(profileDTO.getUserId()).orElseThrow(()->new ResourceNotFoundException("User Not found"));
-         profile= Profile
-                .builder()
-                .achievements(profileDTO.getAchievements())
-                .bio(profileDTO.getBio())
-                .branch(profileDTO.getBranch())
-                .designation(profileDTO.getDesignation())
-                .firstname(profileDTO.getFirstname())
-                .lastname(profileDTO.getLastname())
-//                .user(user)
-                .skills(profileDTO.getSkills())
-                .year(profileDTO.getYear())
-                .links(profileDTO.getLinks())
-                .build();
-        profile.setId(profileId);
-        profileRepository.save(profile);
-        return modelMapper.map(profile, ProfileDTO.class);
+    @Transactional
+    public ProfileDTO updateProfileById(Long profileId, ProfileDTO profileDTO) {
+        Profile profile = profileRepository.findById(profileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile Not found with ID: " + profileId));
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!profile.getUser().getId().equals(currentUser.getId())) {
+            throw new UnAuthorisedException("This user does not own this profile with id: " + profileId);
+        }
+        profile.setFirstname(profileDTO.getFirstname());
+        profile.setLastname(profileDTO.getLastname());
+        profile.setBio(profileDTO.getBio());
+        profile.setBranch(profileDTO.getBranch());
+        profile.setYear(profileDTO.getYear());
+        profile.setDesignation(profileDTO.getDesignation());
+        profile.setSkills(profileDTO.getSkills());
+        profile.setLinks(profileDTO.getLinks());
+        profile.setAchievements(profileDTO.getAchievements());
+        Profile updatedProfile = profileRepository.save(profile);
+        ProfileDTO response = modelMapper.map(updatedProfile, ProfileDTO.class);
+        response.setUserId(updatedProfile.getUser().getId());
+
+        return response;
     }
+
 
 }

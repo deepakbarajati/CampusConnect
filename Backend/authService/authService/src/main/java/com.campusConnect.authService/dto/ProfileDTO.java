@@ -12,6 +12,8 @@ import java.util.List;
 @Setter
 public class ProfileDTO {
 
+    private Long id;
+
     @NotNull(message = "UserId is compulsory")
     private Long userId;
 
