@@ -40,7 +40,8 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/admin/**").hasRole(ADMIN.name())
-                        .requestMatchers("/auth/**").anonymous()
+                        .requestMatchers("/auth/signup", "/auth/login", "/auth/refresh").permitAll()
+                        .requestMatchers("/auth/change-password").authenticated()
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling(exHandlingConfig->exHandlingConfig.accessDeniedHandler(accessDeniedHandler()));

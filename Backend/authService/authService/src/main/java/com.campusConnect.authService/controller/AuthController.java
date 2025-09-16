@@ -1,5 +1,6 @@
 package com.campusConnect.authService.controller;
 
+import com.campusConnect.authService.dto.ChangePasswordRequest;
 import com.campusConnect.authService.dto.LoginDTO;
 import com.campusConnect.authService.dto.SignUpRequestDTO;
 import com.campusConnect.authService.dto.UserDTO;
@@ -52,5 +53,11 @@ public class AuthController {
         String accessToken = authService.refreshToken(refreshToken);
 
         return ResponseEntity.ok(accessToken);
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequest request) {
+        authService.changePassword(request.getOldPassword(), request.getNewPassword());
+        return ResponseEntity.ok("Password changed successfully");
     }
 }
