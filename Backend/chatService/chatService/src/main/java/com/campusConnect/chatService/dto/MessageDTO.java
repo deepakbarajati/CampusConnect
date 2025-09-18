@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class MessageDTO {
+    private Long id;
 
     @NotNull(message = "ChatRoom's Id is mandatory")
     private Long chatRoomId;
@@ -18,14 +19,15 @@ public class MessageDTO {
     @NotNull(message = "Sender's Id is mandatory")
     private Long senderId;
 
-    @NotNull(message = "Sender's Id is mandatory")
     private Long receiverId;
 
-    @NotBlank(message = "Message field can not be blank")
+    @NotBlank(message = "Message content cannot be blank")
     private String content;
 
+    @NotNull(message = "Message type is mandatory")
     private MessageType type;
-    private LocalDateTime sendAt;
 
-    private Boolean isRead;
+    private LocalDateTime sentAt;
+
+    private Boolean isRead = false; // default false
 }

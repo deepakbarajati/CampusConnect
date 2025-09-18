@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ChatRoomMemberDTO {
+    private Long id;
 
     private Long chatRoomId;
 

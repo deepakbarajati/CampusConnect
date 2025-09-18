@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class ChatRoomDTO {
 
+    private Long id;
+
     private String name;
 
     @NotNull(message = "ChatType is Required")

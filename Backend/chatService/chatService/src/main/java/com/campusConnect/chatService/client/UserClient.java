@@ -11,7 +11,7 @@ import org.springframework.web.client.RestClient;
 public class UserClient {
     private final RestClient restClient;
     public Boolean userExist(Long userId){
-        String uri="exists/"+userId;
+        String uri=""+userId;
         ApiResponse<Boolean> exist= restClient.get()
                 .uri(uri)
                 .retrieve()

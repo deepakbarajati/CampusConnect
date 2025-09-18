@@ -1,7 +1,6 @@
 package com.campusConnect.chatService.controller;
 
 import com.campusConnect.chatService.dto.ChatRoomDTO;
-import com.campusConnect.chatService.entity.enums.ChatType;
 import com.campusConnect.chatService.service.ChatRoomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
