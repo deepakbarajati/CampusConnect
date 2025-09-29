@@ -3,7 +3,14 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for authService" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="apiGateway" />
+        <module name="discoveryServer" />
+      </profile>
+      <profile name="Annotation profile for chatService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -14,8 +21,8 @@
         <module name="classroomService" />
         <module name="opportunityService" />
         <module name="aluminiService" />
-        <module name="authService" />
         <module name="forumService" />
+        <module name="authService" />
         <module name="gamificationService" />
       </profile>
     </annotationProcessing>
@@ -23,9 +30,11 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="aluminiService" options="-parameters" />
+      <module name="apiGateway" options="-parameters" />
       <module name="authService" options="-parameters" />
       <module name="chatService" options="-parameters" />
       <module name="classroomService" options="-parameters" />
+      <module name="discoveryServer" options="-parameters" />
       <module name="forumService" options="-parameters" />
       <module name="gamificationService" options="-parameters" />
       <module name="opportunityService" options="-parameters" />

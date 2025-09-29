@@ -11,6 +11,15 @@
         <option value="$PROJECT_DIR$/classroomService/classroomService/pom.xml" />
         <option value="$PROJECT_DIR$/opportunityService/opportunityService/pom.xml" />
         <option value="$PROJECT_DIR$/gamificationService/gamificationService/pom.xml" />
+        <option value="$PROJECT_DIR$/discoveryServer/pom.xml" />
+        <option value="$PROJECT_DIR$/chatService/pom.xml" />
+        <option value="$PROJECT_DIR$/aluminiService/pom.xml" />
+        <option value="$PROJECT_DIR$/apiGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/authService/pom.xml" />
+        <option value="$PROJECT_DIR$/classroomService/pom.xml" />
+        <option value="$PROJECT_DIR$/forumService/pom.xml" />
+        <option value="$PROJECT_DIR$/gamificationService/pom.xml" />
+        <option value="$PROJECT_DIR$/opportunityService/pom.xml" />
       </list>
     </option>
   </component>
