@@ -8,11 +8,11 @@ public interface NotificationService {
 
     NotificationDTO createNotification(NotificationDTO notificationDTO);
 
-    NotificationDTO getNotificationById(Long id);
+    NotificationDTO getNotificationById(String id);
 
     List<NotificationDTO> getAllNotifications();
 
-    NotificationDTO updateNotification(Long id, NotificationDTO notificationDTO);
+    NotificationDTO updateNotification(String id, NotificationDTO notificationDTO);
 
-    void deleteNotification(Long id);
+    void deleteNotification(String id);
 }

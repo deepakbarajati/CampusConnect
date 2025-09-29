@@ -30,22 +30,22 @@ public class ChatRoomMemberController {
 
 
     @GetMapping("/{chatRoomMemberId}")
-    public ResponseEntity<ChatRoomMemberDTO> getChatRoomMemberById(@PathVariable Long chatRoomMemberId){
+    public ResponseEntity<ChatRoomMemberDTO> getChatRoomMemberById(@PathVariable String chatRoomMemberId){
         return new ResponseEntity<>(chatRoomMemberService.getChatRoomMemberById(chatRoomMemberId),HttpStatus.FOUND);
     }
 
     @DeleteMapping("/{chatRoomMemberId}")
-    public ResponseEntity<ChatRoomMemberDTO> deleteChatRoomMemberById(@PathVariable Long chatRoomMemberId){
+    public ResponseEntity<ChatRoomMemberDTO> deleteChatRoomMemberById(@PathVariable String chatRoomMemberId){
         return new ResponseEntity<>(chatRoomMemberService.deleteChatRoomMemberById(chatRoomMemberId),HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{chatRoomMemberId}")
-    public ResponseEntity<ChatRoomMemberDTO> updateChatRoomMemberById(@PathVariable Long chatRoomMemberId, @Valid @RequestBody ChatRoomMemberDTO chatRoomMemberDTO ){
+    public ResponseEntity<ChatRoomMemberDTO> updateChatRoomMemberById(@PathVariable String chatRoomMemberId, @Valid @RequestBody ChatRoomMemberDTO chatRoomMemberDTO ){
         return new ResponseEntity<>(chatRoomMemberService.updateChatRoomMemberById(chatRoomMemberId,chatRoomMemberDTO),HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/chatRoom/{chatRoomId}")
-    public ResponseEntity<List<ChatRoomMemberDTO>> getAllChatRoomMemberByChatRoomId(@PathVariable Long chatRoomId){
+    public ResponseEntity<List<ChatRoomMemberDTO>> getAllChatRoomMemberByChatRoomId(@PathVariable String chatRoomId){
         return new ResponseEntity<>(chatRoomMemberService.getAllChatRoomMemberByChatRoomId(chatRoomId),HttpStatus.ACCEPTED);
     }
 }

@@ -10,9 +10,9 @@ public interface ChatRoomService {
 
     List<ChatRoomDTO> getAllChatRoom();
 
-    ChatRoomDTO getChatRoomById(Long chatRoomId);
+    ChatRoomDTO getChatRoomById(String chatRoomId);
 
-    ChatRoomDTO deleteChatRoomById(Long chatRoomId);
+    ChatRoomDTO deleteChatRoomById(String chatRoomId);
 
-    ChatRoomDTO updateChatRoomById(Long chatRoomId, @Valid ChatRoomDTO chatRoomDTO);
+    ChatRoomDTO updateChatRoomById(String chatRoomId, @Valid ChatRoomDTO chatRoomDTO);
 }

@@ -32,7 +32,7 @@ public class ChatRoomMemberServiceImpl implements ChatRoomMemberService {
 
         ChatRoomMember chatRoomMember = mapperUtils.mapWithRelations(chatRoomMemberDTO, ChatRoomMember.class);
 
-        if (chatRoomMember.getChatRoom() == null) {
+        if (chatRoomMember.getChatRoomId() == null) {
             throw new ResourceNotFoundException("ChatRoom Not found with id: " + chatRoomMemberDTO.getChatRoomId());
         }
 
@@ -51,7 +51,7 @@ public class ChatRoomMemberServiceImpl implements ChatRoomMemberService {
     }
 
     @Override
-    public ChatRoomMemberDTO getChatRoomMemberById(Long chatRoomMemberId) {
+    public ChatRoomMemberDTO getChatRoomMemberById(String chatRoomMemberId) {
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findById(chatRoomMemberId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoomMember Not found with this id: " + chatRoomMemberId));
 
@@ -59,7 +59,7 @@ public class ChatRoomMemberServiceImpl implements ChatRoomMemberService {
     }
 
     @Override
-    public ChatRoomMemberDTO deleteChatRoomMemberById(Long chatRoomMemberId) {
+    public ChatRoomMemberDTO deleteChatRoomMemberById(String chatRoomMemberId) {
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findById(chatRoomMemberId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoomMember Not found with this id: " + chatRoomMemberId));
 
@@ -69,7 +69,7 @@ public class ChatRoomMemberServiceImpl implements ChatRoomMemberService {
     }
 
     @Override
-    public ChatRoomMemberDTO updateChatRoomMemberById(Long chatRoomMemberId, ChatRoomMemberDTO chatRoomMemberDTO) {
+    public ChatRoomMemberDTO updateChatRoomMemberById(String chatRoomMemberId, ChatRoomMemberDTO chatRoomMemberDTO) {
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findById(chatRoomMemberId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoomMember Not found with this id: " + chatRoomMemberId));
 
@@ -82,7 +82,7 @@ public class ChatRoomMemberServiceImpl implements ChatRoomMemberService {
     }
 
     @Override
-    public List<ChatRoomMemberDTO> getAllChatRoomMemberByChatRoomId(Long chatRoomId) {
+    public List<ChatRoomMemberDTO> getAllChatRoomMemberByChatRoomId(String chatRoomId) {
         return chatRoomMemberRepository.getByChatRoomId(chatRoomId)
                 .stream()
                 .map(element -> mapperUtils.map(element, ChatRoomMemberDTO.class))

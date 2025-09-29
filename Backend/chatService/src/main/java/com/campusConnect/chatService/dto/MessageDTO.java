@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class MessageDTO {
-    private Long id;
+    private String id;
 
     @NotNull(message = "ChatRoom's Id is mandatory")
-    private Long chatRoomId;
+    private String chatRoomId;
 
     @NotNull(message = "Sender's Id is mandatory")
     private Long senderId;

@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class AttachmentDTO {
 
-    private Long id;
+    private String id;
 
     @NotNull(message = "Message ID cannot be null")
-    private Long messageId;
+    private String messageId;
 
     private String fileUrl;
 

@@ -24,7 +24,7 @@ public class AttachmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AttachmentDTO> getAttachmentById(@PathVariable Long id) {
+    public ResponseEntity<AttachmentDTO> getAttachmentById(@PathVariable String id) {
         return ResponseEntity.ok(attachmentService.getAttachmentById(id));
     }
 
@@ -34,13 +34,13 @@ public class AttachmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AttachmentDTO> updateAttachment(@PathVariable Long id,
+    public ResponseEntity<AttachmentDTO> updateAttachment(@PathVariable String  id,
                                                           @Valid @RequestBody AttachmentDTO attachmentDTO) {
         return ResponseEntity.ok(attachmentService.updateAttachment(id, attachmentDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAttachment(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAttachment(@PathVariable String id) {
         attachmentService.deleteAttachment(id);
         return ResponseEntity.noContent().build();
     }

@@ -10,7 +10,7 @@
         <module name="apiGateway" />
         <module name="discoveryServer" />
       </profile>
-      <profile name="Annotation profile for chatService" enabled="true">
+      <profile name="Annotation profile for opportunityService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,10 +20,19 @@
         <module name="chatService" />
         <module name="classroomService" />
         <module name="opportunityService" />
-        <module name="aluminiService" />
         <module name="forumService" />
         <module name="authService" />
         <module name="gamificationService" />
+      </profile>
+      <profile name="Annotation profile for aluminiService" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="aluminiService" />
       </profile>
     </annotationProcessing>
   </component>

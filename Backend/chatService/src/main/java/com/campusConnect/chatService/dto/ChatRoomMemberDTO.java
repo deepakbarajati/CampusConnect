@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ChatRoomMemberDTO {
-    private Long id;
+    private String id;
 
-    private Long chatRoomId;
+    private String chatRoomId;
 
     private Long userId;
 

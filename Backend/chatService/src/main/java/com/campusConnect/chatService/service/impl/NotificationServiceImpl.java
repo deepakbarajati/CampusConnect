@@ -26,7 +26,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public NotificationDTO getNotificationById(Long id) {
+    public NotificationDTO getNotificationById(String id) {
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id: " + id));
         return mapperUtils.map(notification, NotificationDTO.class);
@@ -39,7 +39,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public NotificationDTO updateNotification(Long id, NotificationDTO notificationDTO) {
+    public NotificationDTO updateNotification(String id, NotificationDTO notificationDTO) {
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id: " + id));
 
@@ -53,7 +53,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void deleteNotification(Long id) {
+    public void deleteNotification(String id) {
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id: " + id));
         notificationRepository.delete(notification);

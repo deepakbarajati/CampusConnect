@@ -11,11 +11,11 @@ public interface ChatRoomMemberService {
 
     List<ChatRoomMemberDTO> getAllChatRoomMember();
 
-    ChatRoomMemberDTO getChatRoomMemberById(Long chatRoomMemberId);
+    ChatRoomMemberDTO getChatRoomMemberById(String chatRoomMemberId);
 
-    ChatRoomMemberDTO deleteChatRoomMemberById(Long chatRoomMemberId);
+    ChatRoomMemberDTO deleteChatRoomMemberById(String chatRoomMemberId);
 
-    ChatRoomMemberDTO updateChatRoomMemberById(Long chatRoomMemberId, @Valid ChatRoomMemberDTO chatRoomMemberDTO);
+    ChatRoomMemberDTO updateChatRoomMemberById(String chatRoomMemberId, @Valid ChatRoomMemberDTO chatRoomMemberDTO);
 
-    List<ChatRoomMemberDTO> getAllChatRoomMemberByChatRoomId(Long chatRoomId);
+    List<ChatRoomMemberDTO> getAllChatRoomMemberByChatRoomId(String chatRoomId);
 }

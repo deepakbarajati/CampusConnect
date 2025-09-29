@@ -1,8 +1,10 @@
 package com.campusConnect.chatService.util;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 public class MapperUtils {
 
     private final ModelMapper modelMapper;
-    private final EntityManager entityManager;
+    private final MongoTemplate mongoTemplate;
 
     /**
      * Basic map (no nested handling)
@@ -29,7 +31,7 @@ public class MapperUtils {
     }
 
     /**
-     * Advanced map that resolves nested entity IDs.
+     * Advanced map that resolves nested entity IDs using MongoDB.
      * Example:
      *  - DTO has messageId
      *  - Entity has Message message
@@ -48,16 +50,44 @@ public class MapperUtils {
                         var entityField = targetClass.getDeclaredField(entityName);
                         entityField.setAccessible(true);
 
-                        // Load referenced entity using JPA EntityManager
-                        Object refEntity = entityManager.find(entityField.getType(), idValue);
+                        // Load referenced entity using MongoDB
+                        Object refEntity = findEntityById(entityField.getType(), idValue);
                         if (refEntity != null) {
                             entityField.set(target, refEntity);
                         }
                     }
                 } catch (Exception ignored) {
+                    // Handle exceptions silently as in original code
                 }
             }
         }
         return target;
+    }
+
+    /**
+     * Helper method to find entity by ID in MongoDB
+     */
+    private Object findEntityById(Class<?> entityType, Object id) {
+        try {
+            // Convert ID to String if needed (MongoDB typically uses String IDs)
+            String stringId = id.toString();
+
+            // Use MongoTemplate to find by ID
+            return mongoTemplate.findById(stringId, entityType);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Alternative method if you prefer using specific field name for ID lookup
+     */
+    private Object findEntityByField(Class<?> entityType, String fieldName, Object value) {
+        try {
+            Query query = new Query(Criteria.where(fieldName).is(value));
+            return mongoTemplate.findOne(query, entityType);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

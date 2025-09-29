@@ -8,17 +8,17 @@ public interface MessageService {
 
     MessageDTO createMessage(MessageDTO messageDTO);
 
-    MessageDTO updateMessage(Long id, MessageDTO messageDTO);
+    MessageDTO updateMessage(String id, MessageDTO messageDTO);
 
-    void deleteMessage(Long id);
+    void deleteMessage(String id);
 
     List<MessageDTO> getAllMessages();
 
     List<MessageDTO> getAllMessagesByUser(Long userId);
 
-    MessageDTO getMessageById(Long id);
+    MessageDTO getMessageById(String id);
 
-    MessageDTO markMessageAsRead(Long id);
+    MessageDTO markMessageAsRead(String id);
 
-    List<MessageDTO> markAllMessagesAsRead(Long userId, Long chatRoomId);
+    List<MessageDTO> markAllMessagesAsRead(Long userId, String chatRoomId);
 }

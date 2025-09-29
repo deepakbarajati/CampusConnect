@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 public class NotificationDTO {
 
-    private Long id;
+    private String id;
 
     @NotNull(message = "User ID cannot be null")
     private Long userId;

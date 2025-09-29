@@ -54,7 +54,7 @@ public class MessageServiceImpl implements MessageService {
 
 
     @Override
-    public MessageDTO updateMessage(Long id, MessageDTO messageDTO) {
+    public MessageDTO updateMessage(String id, MessageDTO messageDTO) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));
 
@@ -66,7 +66,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void deleteMessage(Long id) {
+    public void deleteMessage(String id) {
         if (!messageRepository.existsById(id)) {
             throw new RuntimeException("Message not found");
         }
@@ -87,17 +87,18 @@ public class MessageServiceImpl implements MessageService {
                 .stream()
                 .map(msg -> mapperUtils.map(msg, MessageDTO.class))
                 .collect(Collectors.toList());
+        // TODO change bussiness logic
     }
 
     @Override
-    public MessageDTO getMessageById(Long id) {
+    public MessageDTO getMessageById(String id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));
         return mapperUtils.map(message, MessageDTO.class);
     }
 
     @Override
-    public MessageDTO markMessageAsRead(Long id) {
+    public MessageDTO markMessageAsRead(String id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));
         message.setIsRead(true);
@@ -105,7 +106,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageDTO> markAllMessagesAsRead(Long userId, Long chatRoomId) {
+    public List<MessageDTO> markAllMessagesAsRead(Long userId, String chatRoomId) {
         List<Message> messages = messageRepository.findByChatRoomId(chatRoomId);
 
         messages.stream()

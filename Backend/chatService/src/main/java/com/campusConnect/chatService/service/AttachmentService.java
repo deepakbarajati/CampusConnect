@@ -8,11 +8,11 @@ public interface AttachmentService {
 
     AttachmentDTO createAttachment(AttachmentDTO attachmentDTO);
 
-    AttachmentDTO getAttachmentById(Long id);
+    AttachmentDTO getAttachmentById(String id);
 
     List<AttachmentDTO> getAllAttachments();
 
-    AttachmentDTO updateAttachment(Long id, AttachmentDTO attachmentDTO);
+    AttachmentDTO updateAttachment(String id, AttachmentDTO attachmentDTO);
 
-    void deleteAttachment(Long id);
+    void deleteAttachment(String id);
 }

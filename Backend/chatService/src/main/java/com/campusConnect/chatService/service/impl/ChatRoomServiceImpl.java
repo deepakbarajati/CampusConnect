@@ -47,7 +47,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
-    public ChatRoomDTO getChatRoomById(Long chatRoomId) {
+    public ChatRoomDTO getChatRoomById(String chatRoomId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoom Not found with ID: " + chatRoomId));
 
@@ -55,7 +55,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
-    public ChatRoomDTO deleteChatRoomById(Long chatRoomId) {
+    public ChatRoomDTO deleteChatRoomById(String chatRoomId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoom Not found with ID: " + chatRoomId));
 
@@ -66,7 +66,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
-    public ChatRoomDTO updateChatRoomById(Long chatRoomId, ChatRoomDTO chatRoomDTO) {
+    public ChatRoomDTO updateChatRoomById(String chatRoomId, ChatRoomDTO chatRoomDTO) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoom Not found with ID: " + chatRoomId));
 

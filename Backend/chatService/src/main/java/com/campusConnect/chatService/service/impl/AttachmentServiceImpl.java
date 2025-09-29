@@ -27,14 +27,13 @@ public class AttachmentServiceImpl implements AttachmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Message not found with id: " + attachmentDTO.getMessageId()));
 
         Attachment attachment = mapperUtils.map(attachmentDTO, Attachment.class);
-        attachment.setMessage(message);
 
         Attachment savedAttachment = attachmentRepository.save(attachment);
         return mapperUtils.map(savedAttachment, AttachmentDTO.class);
     }
 
     @Override
-    public AttachmentDTO getAttachmentById(Long id) {
+    public AttachmentDTO getAttachmentById(String id) {
         Attachment attachment = attachmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Attachment not found with id: " + id));
 
@@ -48,7 +47,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     @Override
-    public AttachmentDTO updateAttachment(Long id, AttachmentDTO attachmentDTO) {
+    public AttachmentDTO updateAttachment(String id, AttachmentDTO attachmentDTO) {
         Attachment attachment = attachmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Attachment not found with id: " + id));
 
@@ -61,7 +60,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     @Override
-    public void deleteAttachment(Long id) {
+    public void deleteAttachment(String id) {
         Attachment attachment = attachmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Attachment not found with id: " + id));
         attachmentRepository.delete(attachment);

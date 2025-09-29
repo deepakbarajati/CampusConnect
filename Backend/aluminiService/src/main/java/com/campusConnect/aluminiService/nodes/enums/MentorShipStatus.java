@@ -5,6 +5,6 @@ public enum MentorShipStatus {
     ACCEPTED,
     ACTIVE,
     COMPLETED,
-    REJECTED,
-    CANCELLED
+    CANCELLED,
+    PAUSED
 }

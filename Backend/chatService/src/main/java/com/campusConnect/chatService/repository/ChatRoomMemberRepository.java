@@ -9,7 +9,7 @@ import java.util.List;
 public interface ChatRoomMemberRepository extends MongoRepository<ChatRoomMember, String> {
 
 
-    List<ChatRoomMember> getByChatRoomId(Long chatRoomId);
+    List<ChatRoomMember> getByChatRoomId(String chatRoomId);
 
-    void deleteByChatRoomId(Long chatRoomId);
+    void deleteByChatRoomId(String chatRoomId);
 }

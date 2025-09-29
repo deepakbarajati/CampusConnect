@@ -29,17 +29,17 @@ public class ChatRoomController {
 
 
     @GetMapping("/{chatRoomId}")
-    public ResponseEntity<ChatRoomDTO> getChatRoomById(@PathVariable Long chatRoomId){
+    public ResponseEntity<ChatRoomDTO> getChatRoomById(@PathVariable String chatRoomId){
         return new ResponseEntity<>(chatRoomService.getChatRoomById(chatRoomId),HttpStatus.FOUND);
     }
 
     @DeleteMapping("/{chatRoomId}")
-    public ResponseEntity<ChatRoomDTO> deleteChatRoomById(@PathVariable Long chatRoomId){
+    public ResponseEntity<ChatRoomDTO> deleteChatRoomById(@PathVariable String chatRoomId){
         return new ResponseEntity<>(chatRoomService.deleteChatRoomById(chatRoomId),HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{chatRoomId}")
-    public ResponseEntity<ChatRoomDTO> updateChatRoomById(@PathVariable Long chatRoomId, @RequestBody ChatRoomDTO chatRoomDTO){
+    public ResponseEntity<ChatRoomDTO> updateChatRoomById(@PathVariable String chatRoomId, @RequestBody ChatRoomDTO chatRoomDTO){
         return new ResponseEntity<>(chatRoomService.updateChatRoomById(chatRoomId,chatRoomDTO),HttpStatus.ACCEPTED);
     }
 }
