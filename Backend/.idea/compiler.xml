@@ -9,29 +9,21 @@
         <outputRelativeToContentRoot value="true" />
         <module name="apiGateway" />
         <module name="discoveryServer" />
+        <module name="config-server" />
       </profile>
-      <profile name="Annotation profile for aluminiService" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-        </processorPath>
-        <module name="aluminiService" />
-      </profile>
-      <profile name="Annotation profile for classroomService" enabled="true">
+      <profile name="Annotation profile for opportunityService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="opportunityService" />
         <module name="chatService" />
+        <module name="classroomService" />
+        <module name="opportunityService" />
+        <module name="aluminiService" />
         <module name="forumService" />
         <module name="authService" />
-        <module name="classroomService" />
         <module name="gamificationService" />
       </profile>
     </annotationProcessing>
@@ -43,6 +35,7 @@
       <module name="authService" options="-parameters" />
       <module name="chatService" options="-parameters" />
       <module name="classroomService" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="discoveryServer" options="-parameters" />
       <module name="forumService" options="-parameters" />
       <module name="gamificationService" options="-parameters" />

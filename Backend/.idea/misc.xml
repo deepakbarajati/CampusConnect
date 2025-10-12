@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/forumService/pom.xml" />
         <option value="$PROJECT_DIR$/gamificationService/pom.xml" />
         <option value="$PROJECT_DIR$/opportunityService/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
       </list>
     </option>
   </component>
