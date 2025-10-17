@@ -1,22 +1,18 @@
 package com.campusConnect.chatService.client;
 
 import com.campusConnect.chatService.advice.ApiResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+import org.springframework.cloud.openfeign.FeignClient;
 
-@Service
-@RequiredArgsConstructor
-public class UserClient {
-    private final RestClient restClient;
-    public Boolean userExist(Long userId){
-        String uri=""+userId;
-        ApiResponse<Boolean> exist= restClient.get()
-                .uri(uri)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-        return exist.getData();
-    }
+@FeignClient(name = "authService", url = "http://localhost:8080", path = "api/v1/campusConnect/auth")
+//@FeignClient(name = "authService", url = "http://localhost:8080", path = "api/v1/campusConnect/auth")
+public interface UserClient {
+
+    @GetMapping("/user/{userId}")
+    ResponseEntity<ApiResponse<Boolean>> userExistWithId(@PathVariable("userId") Long userId);
 }
+
+

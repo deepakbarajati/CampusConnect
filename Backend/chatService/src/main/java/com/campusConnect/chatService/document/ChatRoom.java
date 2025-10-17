@@ -1,6 +1,7 @@
 package com.campusConnect.chatService.document;
 
 import com.campusConnect.chatService.document.enums.ChatType;
+import jakarta.annotation.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
@@ -10,7 +11,9 @@ import lombok.Setter;
 @Setter
 @Document(collection = "chat_rooms")
 public class ChatRoom {
+
   @Id
+
   private String id; // MongoDB's ObjectId, typically a string
 
   private String name;

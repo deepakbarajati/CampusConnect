@@ -23,7 +23,7 @@ public class Message {
 
     private Long senderId;
 
-    private Long receiverId; // Not null for private messages
+    private String receiverId; // Not null for private messages
 
     private String content;
 

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.campusConnect.chatService.auth.UserContextHolder.getCurrentUserId;
+
 @Service
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
@@ -30,24 +32,26 @@ public class MessageServiceImpl implements MessageService {
         ChatRoom chatRoom = chatRoomRepository.findById(messageDTO.getChatRoomId())
                 .orElseThrow(() -> new ResourceNotFoundException("ChatRoom not found with id: " + messageDTO.getChatRoomId()));
 
-        if (!userClient.userExist(messageDTO.getSenderId())) {
-            throw new ResourceNotFoundException("Sender not found with id: " + messageDTO.getSenderId());
-        }
+
 
         if (chatRoom.getType().equals(ChatType.PRIVATE)) {
             if (messageDTO.getReceiverId() == null) {
-                throw new IllegalArgumentException("ReceiverId must not be null for private chatrooms");
+                throw new IllegalArgumentException("ReceiverId not be null for private chatrooms");
             }
-            if (!userClient.userExist(messageDTO.getReceiverId())) {
+
+            Boolean exists = userClient.userExistWithId(messageDTO.getReceiverId()).getBody().getData();
+
+            if (!exists) {
                 throw new ResourceNotFoundException("Receiver not found with id: " + messageDTO.getReceiverId());
             }
         } else {
             messageDTO.setReceiverId(null);
         }
 
-        Message message = mapperUtils.mapWithRelations(messageDTO, Message.class);
-        message.setIsRead(false);
 
+        Message message = mapperUtils.mapWithRelations(messageDTO, Message.class);
+        message.setSenderId(getCurrentUserId());
+        message.setIsRead(false);
         Message saved = messageRepository.save(message);
         return mapperUtils.map(saved, MessageDTO.class);
     }

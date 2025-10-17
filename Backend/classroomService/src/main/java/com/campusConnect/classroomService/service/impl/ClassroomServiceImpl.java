@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.campusConnect.classroomService.auth.UserContextHolder.getCurrentUserId;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,6 +32,10 @@ public class ClassroomServiceImpl implements ClassroomService {
         log.info("Creating new classroom for teacher: {} with subject: {}",
                 classroomDTO.getTeacherId(), classroomDTO.getSubject());
 
+        if(!classroomDTO.getTeacherId().equals(getCurrentUserId())){
+            // TODO check authroriztion is current user is teacher or admin
+            throw new RuntimeException("Curent UserId and and teacher id not match");
+        }
         Classroom classroom = modelMapper.map(classroomDTO, Classroom.class);
 
         // Handle schedule assignment if provided

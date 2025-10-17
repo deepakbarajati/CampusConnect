@@ -2,13 +2,15 @@ package com.campusConnect.chatService.dto;
 
 import com.campusConnect.chatService.document.enums.MemberRole;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChatRoomMemberDTO {
     private String id;
 

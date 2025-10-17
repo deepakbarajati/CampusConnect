@@ -1,5 +1,6 @@
 package com.campusConnect.chatService.service.impl;
 
+import com.campusConnect.chatService.client.UserClient;
 import com.campusConnect.chatService.dto.NotificationDTO;
 import com.campusConnect.chatService.document.Notification;
 import com.campusConnect.chatService.exception.ResourceNotFoundException;
@@ -17,9 +18,17 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final MapperUtils mapperUtils;
+    private final UserClient userClient;
 
     @Override
     public NotificationDTO createNotification(NotificationDTO notificationDTO) {
+
+        Boolean exists = userClient.userExistWithId(notificationDTO.getUserId()).getBody().getData();
+
+        if(!exists){
+            throw new ResourceNotFoundException("User Not Exist with userId: "+notificationDTO.getUserId());
+        }
+
         Notification notification = mapperUtils.map(notificationDTO, Notification.class);
         Notification saved = notificationRepository.save(notification);
         return mapperUtils.map(saved, NotificationDTO.class);

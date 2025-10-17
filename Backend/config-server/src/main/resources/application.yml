@@ -5,9 +5,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/deepakbarajati/campusConnect-config-server
-          username: ${USER_NAME}
-          password: ${github_config_server_token}
+          uri: ${uri}
+          username: ${username}
+          password: ${github_token}
           default-label: ${repo_branch}
 
 server:

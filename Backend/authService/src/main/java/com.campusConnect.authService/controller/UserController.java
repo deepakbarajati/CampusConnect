@@ -2,12 +2,14 @@ package com.campusConnect.authService.controller;
 
 import com.campusConnect.authService.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -17,8 +19,8 @@ public class UserController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Boolean> userExistWithId(@PathVariable Long userId){
-        Boolean isExist=userService.userExistWithId(userId);
-        return ResponseEntity.ok(isExist);
+    Boolean userExistWithId(@PathVariable Long userId){
+        log.info("Coming in this function");
+        return userService.userExistWithId(userId);
     }
 }

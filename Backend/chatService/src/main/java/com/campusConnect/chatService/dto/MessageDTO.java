@@ -16,9 +16,6 @@ public class MessageDTO {
     @NotNull(message = "ChatRoom's Id is mandatory")
     private String chatRoomId;
 
-    @NotNull(message = "Sender's Id is mandatory")
-    private Long senderId;
-
     private Long receiverId;
 
     @NotBlank(message = "Message content cannot be blank")
