@@ -1,7 +1,10 @@
 package com.campusConnect.authService.controller;
 
+import com.campusConnect.authService.config.RateLimited;
 import com.campusConnect.authService.dto.ChangePasswordRequest;
+import com.campusConnect.authService.dto.ForgotPasswordRequest;
 import com.campusConnect.authService.dto.LoginDTO;
+import com.campusConnect.authService.dto.ResetPasswordRequest;
 import com.campusConnect.authService.dto.SignUpRequestDTO;
 import com.campusConnect.authService.dto.UserDTO;
 import com.campusConnect.authService.security.AuthService;
@@ -25,12 +28,14 @@ public class AuthController {
 
 
     @PostMapping("/signup")
+    @RateLimited
     public ResponseEntity<UserDTO> signup(@RequestBody SignUpRequestDTO signUpRequestDto){
         return new ResponseEntity<>(authService.signUp(signUpRequestDto), HttpStatus.CREATED);
 
     }
 
     @PostMapping("/login")
+    @RateLimited
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDto, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         String[] tokens= authService.login(loginDto);
 
@@ -59,5 +64,24 @@ public class AuthController {
     public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequest request) {
         authService.changePassword(request.getOldPassword(), request.getNewPassword());
         return ResponseEntity.ok("Password changed successfully");
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
+        authService.verifyEmail(token);
+        return ResponseEntity.ok("Email verified successfully");
+    }
+
+    @PostMapping("/forgot-password")
+    @RateLimited
+    public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        authService.forgotPassword(request.getEmail());
+        return ResponseEntity.ok("Password reset email sent");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.ok("Password reset successfully");
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -20,5 +22,9 @@ public class Poll {
     @JoinColumn(name = "forum_id")
     private Forum forum;
 
-    //TODO add list of options and votes
+    @ElementCollection
+    private List<String> options;
+
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PollVote> votes;
 }

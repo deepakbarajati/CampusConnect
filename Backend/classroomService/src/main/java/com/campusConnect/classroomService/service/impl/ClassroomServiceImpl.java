@@ -9,6 +9,8 @@ import com.campusConnect.classroomService.service.ClassroomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,13 +66,11 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ClassroomDTO> getAllClassrooms() {
-        log.info("Fetching all classrooms");
+    public Page<ClassroomDTO> getAllClassrooms(Pageable pageable) {
+        log.info("Fetching all classrooms with pagination");
 
-        List<Classroom> classrooms = classroomRepository.findAll();
-        return classrooms.stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+        Page<Classroom> classrooms = classroomRepository.findAll(pageable);
+        return classrooms.map(this::mapToDTO);
     }
 
     @Override

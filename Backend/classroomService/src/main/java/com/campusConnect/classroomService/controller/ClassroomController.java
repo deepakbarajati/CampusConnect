@@ -5,6 +5,8 @@ import com.campusConnect.classroomService.service.ClassroomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,11 +40,11 @@ public class ClassroomController {
 
     // Get all classrooms
     @GetMapping
-    public ResponseEntity<List<ClassroomDTO>> getAllClassrooms() {
+    public ResponseEntity<Page<ClassroomDTO>> getAllClassrooms(Pageable pageable) {
         log.info("Request to get all classrooms");
 
         try {
-            List<ClassroomDTO> classrooms = classroomService.getAllClassrooms();
+            Page<ClassroomDTO> classrooms = classroomService.getAllClassrooms(pageable);
             return new ResponseEntity<>(classrooms, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error fetching all classrooms: {}", e.getMessage());

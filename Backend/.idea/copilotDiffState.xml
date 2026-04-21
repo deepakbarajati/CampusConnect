@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="/application (snapshot).properties">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/application (snapshot).properties" />
+              <option name="originalContent" value="spring.application.name=authService&#10;&#10;spring.config.import=configserver:http://localhost:8888" />
+              <option name="updatedContent" value="spring.application.name=authService&#10;spring.config.import=configserver:http://localhost:8888&#10;&#10;# Database Configuration&#10;spring.datasource.url=jdbc:postgresql://localhost:5432/campusconnect_auth&#10;spring.datasource.username=postgres&#10;spring.datasource.password=password&#10;spring.datasource.driver-class-name=org.postgresql.Driver&#10;&#10;# JPA Configuration&#10;spring.jpa.hibernate.ddl-auto=update&#10;spring.jpa.show-sql=true&#10;spring.jpa.properties.hibernate.format_sql=true&#10;&#10;# Mail Configuration&#10;spring.mail.host=smtp.gmail.com&#10;spring.mail.port=587&#10;spring.mail.username=your-email@gmail.com&#10;spring.mail.password=your-app-password&#10;spring.mail.properties.mail.smtp.auth=true&#10;spring.mail.properties.mail.smtp.starttls.enable=true&#10;&#10;# JWT Configuration&#10;jwt.secretKey=mySecretKey1234567890123456789012345678901234567890&#10;&#10;# Eureka Configuration&#10;eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/&#10;eureka.instance.prefer-ip-address=true&#10;&#10;# Logging&#10;logging.level.com.campusConnect.authService=DEBUG&#10;logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

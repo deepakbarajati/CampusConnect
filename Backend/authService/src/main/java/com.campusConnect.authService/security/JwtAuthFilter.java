@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.slf4j.MDC;
 
 import java.io.IOException;
 
@@ -44,6 +45,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = requestTokenHeader.split("Bearer ")[1];
             Long userId = jwtService.getUserIdFromToken(token);
 
+            MDC.put("userID", String.valueOf(userId));
+
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User user = userService.getUserById(userId);
                 UsernamePasswordAuthenticationToken authenticationToken =
@@ -56,6 +59,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (JwtException ex) {
             handlerExceptionResolver.resolveException(request, response, null, ex);
+        } finally {
+            MDC.clear();
         }
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +37,15 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = false)
+    private boolean emailVerified = false;
+
+    private String verificationToken;
+
+    private String resetToken;
+
+    private LocalDateTime resetTokenExpiry;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

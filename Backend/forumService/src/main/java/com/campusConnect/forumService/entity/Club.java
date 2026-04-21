@@ -20,5 +20,6 @@ public class Club {
 
     private Long createdBy;
 
+    @ElementCollection
     private List<Long> members;
 }

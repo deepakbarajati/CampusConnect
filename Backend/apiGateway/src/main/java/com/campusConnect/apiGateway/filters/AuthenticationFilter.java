@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.slf4j.MDC;
 
 
 @Slf4j
@@ -39,9 +40,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
             try {
                 String userId = jwtService.getUserIdFromToken(token);
+                String userRole = jwtService.getUserRoleFromToken(token);
+                MDC.put("userID", userId);
+                MDC.put("userRole", userRole);
                 ServerWebExchange modifiedExchange = exchange
                         .mutate()
-                        .request(r -> r.header("X-User-Id", userId))
+                        .request(r -> r.header("X-User-Id", userId).header("X-User-Role", userRole))
                         .build();
 
                 return chain.filter(modifiedExchange);
@@ -49,6 +53,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 log.error("JWT Exception: {}", e.getLocalizedMessage());
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
+            } finally {
+                MDC.clear();
             }
         };
     }

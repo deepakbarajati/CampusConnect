@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnAuthorisedException.class)
     public ResponseEntity<ApiResponse<?>> handleUnAuthorisedException(UnAuthorisedException exception){
         ApiError apiError=ApiError.builder()
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.UNAUTHORIZED)
                 .message(exception.getMessage())
                 .build();
         return buildErrorResponseEntity(apiError);
