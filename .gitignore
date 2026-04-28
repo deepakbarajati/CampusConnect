@@ -1,0 +1,20 @@
+# Secrets and local key material
+*.pem
+*.key
+*.p12
+Backend/downlods
+Backend/downlods.pub
+
+# Local environment files
+.env
+.env.*
+
+# IDE files
+.idea/
+**/.idea/
+
+# Build and dependency outputs
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+Backend/**/target/

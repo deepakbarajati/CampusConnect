@@ -21,4 +21,6 @@ public interface MessageService {
     MessageDTO markMessageAsRead(String id);
 
     List<MessageDTO> markAllMessagesAsRead(Long userId, String chatRoomId);
+
+    List<MessageDTO> getMessagesByChatRoom(String chatRoomId);
 }

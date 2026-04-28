@@ -95,6 +95,14 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public List<MessageDTO> getMessagesByChatRoom(String chatRoomId) {
+        return messageRepository.findByChatRoomId(chatRoomId)
+                .stream()
+                .map(msg -> mapperUtils.map(msg, MessageDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public MessageDTO getMessageById(String id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));

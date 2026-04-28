@@ -8,10 +8,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/deepakbarajati/campusConnect-config-server
-          username: ${GIT_USERNAME}
-          password: ${GIT_TOKEN}
-          default-label: ${GIT_BRANCH:main}
+          uri: ${CONFIG_GIT_URI:https://github.com/deepakbarajati/campusConnect-config-server}
+          username: ${CONFIG_GIT_USERNAME:}
+          password: ${CONFIG_GIT_PASSWORD:}
+          default-label: ${CONFIG_GIT_DEFAULT_LABEL:main}
 
 server:
   port: 8888
